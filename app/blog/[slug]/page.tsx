@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Text, Container, Button, Image } from '@/components';
+import { Heading, Text, Container, Button, Image } from '../../../components';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 

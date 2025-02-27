@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter
-} from '@/components';
+} from '../components';
 import Link from 'next/link';
 
 export default function HomePage() {
@@ -74,7 +74,7 @@ export default function HomePage() {
         ctaLink="/contact"
         secondaryCtaText="Learn About Telehealth"
         secondaryCtaLink="/telehealth"
-        backgroundImage="/images/hero-background.jpg"
+        backgroundImage="/images/placeholders/widescreen.svg"
       />
 
       {/* Services Section */}

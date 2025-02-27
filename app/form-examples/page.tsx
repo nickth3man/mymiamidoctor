@@ -1,16 +1,20 @@
 'use client';
 
 import React, { useState, ChangeEvent } from 'react';
-import { Container } from '@/components/ui/Container';
-import { Heading } from '@/components/ui/Heading';
-import { Text } from '@/components/ui/Text';
-import { TextField, TextFieldType } from '@/components/ui/TextField';
-import { Select } from '@/components/ui/Select';
-import { Button } from '@/components/ui/Button';
-import { Checkbox } from '@/components/ui/Checkbox';
-import { Radio } from '@/components/ui/Radio';
-import { TextArea } from '@/components/ui/TextArea';
-import { Card, CardHeader, CardBody, CardFooter } from '@/components/ui/Card';
+import { Container } from '../../components/ui/Container';
+import { Heading } from '../../components/ui/Heading';
+import { Text } from '../../components/ui/Text';
+import { TextField, TextFieldType } from '../../components/ui/TextField';
+import { Select } from '../../components/ui/Select';
+import { FormGroup } from '../../components/ui/FormGroup';
+import { FormLabel } from '../../components/ui/FormLabel';
+import { FormError } from '../../components/ui/FormError';
+import { Button } from '../../components/ui/Button';
+import { Section } from '../../components/ui/Section';
+import { Checkbox } from '../../components/ui/Checkbox';
+import { Radio } from '../../components/ui/Radio';
+import { TextArea } from '../../components/ui/TextArea';
+import { Card, CardHeader, CardBody, CardFooter } from '../../components/ui/Card';
 
 export default function FormExamplesPage() {
   // Form state

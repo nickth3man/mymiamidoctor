@@ -2,14 +2,16 @@
 
 import React, { forwardRef } from 'react';
 import Link from 'next/link';
-import { 
-  UIVariant, 
-  UISize, 
-  ButtonElementProps, 
-  LinkButtonProps, 
+import {
+  UIVariant,
+  UISize,
+  ButtonElementProps,
+  LinkButtonProps,
   InteractiveElementProps,
   isLink
 } from './types';
+import { colors, spacing } from '../../lib/design-tokens';
+import { focusClasses } from '../../lib/design-tokens/focus';
 
 // Button-specific types
 type ButtonVariant = UIVariant;
@@ -32,30 +34,30 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
     } = props;
 
     // Base styles shared between button and link
-    const baseStyles = 'inline-flex items-center justify-center rounded-button font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+    const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
     
-    // Define variant styles
+    // Define variant styles with improved contrast and focus states
     const variantStyles: Record<ButtonVariant, string> = {
-      primary: 'bg-primary text-white hover:bg-primary/90 active:bg-primary/80 shadow hover:shadow-md focus-visible:ring-primary/50',
-      secondary: 'bg-secondary text-white hover:bg-secondary/90 active:bg-secondary/80 shadow hover:shadow-md focus-visible:ring-secondary/50',
-      outline: 'bg-transparent border-2 border-primary text-primary hover:bg-primary/10 active:bg-primary/20 focus-visible:ring-primary/50',
-      text: 'bg-transparent text-primary hover:bg-primary/10 active:bg-primary/20 focus-visible:ring-primary/50',
-      danger: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 shadow hover:shadow-md focus-visible:ring-red-500/50',
-      success: 'bg-green-600 text-white hover:bg-green-700 active:bg-green-800 shadow hover:shadow-md focus-visible:ring-green-500/50',
+      primary: 'bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 shadow-sm hover:shadow focus-visible:ring-primary-500',
+      secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 shadow-sm hover:shadow focus-visible:ring-secondary-500',
+      outline: 'bg-transparent border-2 border-primary-500 text-primary-600 hover:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-500',
+      text: 'bg-transparent text-primary-600 hover:bg-primary-50 active:bg-primary-100 focus-visible:ring-primary-500',
+      danger: 'bg-red-600 text-white hover:bg-red-700 active:bg-red-800 shadow-sm hover:shadow focus-visible:ring-red-500',
+      success: 'bg-green-600 text-white hover:bg-green-700 active:bg-green-800 shadow-sm hover:shadow focus-visible:ring-green-500',
     };
     
-    // Define size styles
+    // Define size styles with improved touch targets
     const sizeStyles: Record<ButtonSize, string> = {
-      xs: 'text-xs px-2.5 py-1.5 gap-1',
-      sm: 'text-sm px-4 py-2 gap-1.5',
-      md: 'text-base px-6 py-2.5 gap-2',
-      lg: 'text-lg px-8 py-3 gap-2.5'
+      xs: 'text-xs px-2.5 py-1.5 gap-1 min-h-[32px] min-w-[32px]',
+      sm: 'text-sm px-4 py-2 gap-1.5 min-h-[36px] min-w-[36px]',
+      md: 'text-base px-6 py-2.5 gap-2 min-h-[44px] min-w-[44px]',
+      lg: 'text-lg px-8 py-3 gap-2.5 min-h-[48px] min-w-[48px]'
     };
     
     // Additional style modifiers
     const widthStyles = isFullWidth ? 'w-full' : '';
-    const disabledStyles = (disabled || isLoading) 
-      ? 'opacity-60 cursor-not-allowed pointer-events-none' 
+    const disabledStyles = (disabled || isLoading)
+      ? 'opacity-70 cursor-not-allowed pointer-events-none'
       : '';
     
     // Combined classes
@@ -63,10 +65,10 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
 
     // Loading spinner component
     const LoadingSpinner = () => (
-      <svg 
-        className="animate-spin h-4 w-4 text-current" 
-        xmlns="http://www.w3.org/2000/svg" 
-        fill="none" 
+      <svg
+        className="animate-spin h-4 w-4 text-current"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
         viewBox="0 0 24 24"
         aria-hidden="true"
       >
@@ -75,9 +77,9 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
       </svg>
     );
 
-    // Screen reader only loading text
+    // Improved loading state for screen readers
     const ScreenReaderLoadingText = isLoading ? (
-      <span className="sr-only" role="status">Loading</span>
+      <span className="sr-only" role="status" aria-live="polite">Loading, please wait</span>
     ) : null;
 
     // Content to render inside button
@@ -110,7 +112,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
       }
       
       return (
-        <Link 
+        <Link
           href={href}
           className={buttonClasses}
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
@@ -132,6 +134,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
         disabled={disabled || isLoading}
         ref={ref as React.ForwardedRef<HTMLButtonElement>}
         type={buttonProps.type || 'button'}
+        aria-pressed={buttonProps['aria-pressed']}
         {...buttonProps}
       >
         {content}
@@ -140,4 +143,4 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
   }
 );
 
-Button.displayName = 'Button'; 
+Button.displayName = 'Button';

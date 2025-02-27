@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Text, Container, Grid, Button, Card, CardHeader, CardBody, CardFooter, Image } from '@/components';
+import { Heading, Text, Container, Grid, Button, Card, CardHeader, CardBody, CardFooter, Image } from '../../components';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 

@@ -1,4 +1,7 @@
 import React from 'react';
+import { cn } from '../../lib/utils';
+import { spacing } from '../../lib/design-tokens/spacing';
+import { breakpoints } from '../../lib/design-tokens';
 
 export type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type GridGap = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -31,32 +34,35 @@ export const Grid: React.FC<GridProps> = ({
     return `${prefix}grid-cols-${cols}`;
   };
 
-  // Define gap styles
+  // Define responsive gap styles with better spacing for small screens
   const gapStyles: Record<GridGap, string> = {
     'none': 'gap-0',
-    'xs': 'gap-2',
-    'sm': 'gap-4',
-    'md': 'gap-6',
-    'lg': 'gap-8',
-    'xl': 'gap-10',
+    'xs': 'gap-2 sm:gap-3',
+    'sm': 'gap-3 sm:gap-4',
+    'md': 'gap-4 sm:gap-6',
+    'lg': 'gap-6 sm:gap-8',
+    'xl': 'gap-8 sm:gap-10',
   };
 
   // Build responsive column classes
-  const columnClasses = [
-    getColumnsClass(columns),
-    columnsSm && getColumnsClass(columnsSm, 'sm'),
-    columnsMd && getColumnsClass(columnsMd, 'md'),
-    columnsLg && getColumnsClass(columnsLg, 'lg'),
-    columnsXl && getColumnsClass(columnsXl, 'xl'),
-  ].filter(Boolean);
+  const responsiveColumns = getColumnsClass(columns);
+  const responsiveColumnsSm = columnsSm ? getColumnsClass(columnsSm, 'sm') : '';
+  const responsiveColumnsMd = columnsMd ? getColumnsClass(columnsMd, 'md') : '';
+  const responsiveColumnsLg = columnsLg ? getColumnsClass(columnsLg, 'lg') : '';
+  const responsiveColumnsXl = columnsXl ? getColumnsClass(columnsXl, 'xl') : '';
 
-  // Combined classes
-  const gridClasses = [
+  // Combined classes using cn utility for better class merging
+  const gridClasses = cn(
     'grid',
-    ...columnClasses,
+    'w-full',
+    responsiveColumns,
+    responsiveColumnsSm,
+    responsiveColumnsMd,
+    responsiveColumnsLg,
+    responsiveColumnsXl,
     gapStyles[gap],
     className
-  ].filter(Boolean).join(' ');
+  );
 
   return (
     <div className={gridClasses} {...rest}>
@@ -65,4 +71,4 @@ export const Grid: React.FC<GridProps> = ({
   );
 };
 
-Grid.displayName = 'Grid'; 
+Grid.displayName = 'Grid';

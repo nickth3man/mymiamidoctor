@@ -10,8 +10,8 @@ import {
   FormLabel, 
   FormError,
   Button
-} from '@/components';
-import { SelectOption } from '@/components/ui/Select';
+} from '../../components';
+import { SelectOption } from '../../components/ui/Select';
 
 // Define types
 interface AppointmentFormData {

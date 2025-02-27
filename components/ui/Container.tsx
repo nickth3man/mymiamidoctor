@@ -1,4 +1,7 @@
 import React from 'react';
+import { cn } from '../../lib/utils';
+import { breakpoints } from '../../lib/design-tokens';
+import { spacing } from '../../lib/design-tokens/spacing';
 
 export type ContainerWidth = 'default' | 'narrow' | 'wide' | 'full';
 export type ContainerAlignment = 'left' | 'center' | 'right';
@@ -19,7 +22,7 @@ export const Container: React.FC<ContainerProps> = ({
   className = '',
   ...rest
 }) => {
-  // Define width styles
+  // Define width styles using container max widths from design tokens
   const widthStyles: Record<ContainerWidth, string> = {
     'default': 'max-w-7xl', // ~1280px
     'narrow': 'max-w-4xl',  // ~896px
@@ -34,17 +37,17 @@ export const Container: React.FC<ContainerProps> = ({
     'right': 'ml-auto',
   };
 
-  // Define padding styles
-  const paddingStyles = noPadding ? '' : 'px-4 sm:px-6 lg:px-8';
+  // Define consistent padding styles across breakpoints
+  const paddingStyles = noPadding ? '' : 'px-4 sm:px-6 md:px-8';
 
-  // Combined classes
-  const containerClasses = [
+  // Combined classes using cn utility for better class merging
+  const containerClasses = cn(
     widthStyles[width],
     alignmentStyles[alignment],
     paddingStyles,
     'w-full',
     className
-  ].filter(Boolean).join(' ');
+  );
 
   return (
     <div className={containerClasses} {...rest}>
@@ -53,4 +56,4 @@ export const Container: React.FC<ContainerProps> = ({
   );
 };
 
-Container.displayName = 'Container'; 
+Container.displayName = 'Container';

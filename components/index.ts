@@ -15,7 +15,6 @@ export { Select } from './ui/Select';
 export { FormGroup } from './ui/FormGroup';
 export { FormLabel } from './ui/FormLabel';
 export { FormError } from './ui/FormError';
-export { ContactForm } from './forms/ContactForm';
 
 // Layout components
 export { Container } from './ui/Container';
@@ -23,5 +22,6 @@ export { Grid } from './ui/Grid';
 export { Flex } from './ui/Flex';
 export { Section } from './ui/Section';
 
-// Section components
-export { HeroSection } from './sections/HeroSection'; 
+// Dynamic components (code-split)
+export { DynamicHeroSection as HeroSection } from './dynamic';
+export { DynamicContactForm as ContactForm } from './dynamic';

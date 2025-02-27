@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
+import { typography } from '../../lib/design-tokens';
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 export type HeadingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
@@ -43,16 +44,28 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
 
     const finalSize = size || defaultSizeMap[level];
 
-    // Define size styles
-    const sizeStyles: Record<HeadingSize, string> = {
+    // Define fluid size styles with responsive typography
+    const fluidSizeStyles: Record<HeadingSize, string> = {
       'xs': 'text-xs',
       'sm': 'text-sm',
       'md': 'text-base',
       'lg': 'text-lg',
       'xl': 'text-xl',
-      '2xl': 'text-2xl',
-      '3xl': 'text-3xl',
-      '4xl': 'text-4xl',
+      '2xl': 'text-2xl md:text-3xl',
+      '3xl': 'text-3xl md:text-4xl',
+      '4xl': 'text-4xl md:text-5xl',
+    };
+
+    // Define responsive line heights for better readability
+    const responsiveLineHeights: Record<HeadingSize, string> = {
+      'xs': 'leading-normal',
+      'sm': 'leading-normal',
+      'md': 'leading-normal',
+      'lg': 'leading-normal',
+      'xl': 'leading-tight',
+      '2xl': 'leading-tight',
+      '3xl': 'leading-tight',
+      '4xl': 'leading-tight',
     };
 
     // Define weight styles
@@ -70,15 +83,15 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       'right': 'text-right',
     };
 
-    // Responsive adjustments for mobile
-    const responsiveStyles = 'md:text-[size] text-[calc(var(--size)*0.85)]';
-
     // Combined classes
     const headingClasses = cn(
       'font-heading',
       'tracking-tight',
       'text-foreground',
-      sizeStyles[finalSize],
+      'antialiased',
+      'text-rendering-optimizeLegibility',
+      fluidSizeStyles[finalSize],
+      responsiveLineHeights[finalSize],
       weightStyles[weight],
       alignStyles[align],
       className
@@ -88,6 +101,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       <Component
         ref={ref}
         className={headingClasses}
+        {...(as && as !== `h${level}` ? { 'aria-level': level } : {})}
         {...rest}
       >
         {children}
@@ -96,4 +110,4 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
   }
 );
 
-Heading.displayName = 'Heading'; 
+Heading.displayName = 'Heading';
