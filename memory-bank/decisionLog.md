@@ -3,35 +3,40 @@
 ## 2/27/2025 - Website Hosting Provider Selection
 
 ### Decision
-Selected Vercel as the recommended hosting provider for the MyMiamiDoctor website with a detailed step-by-step implementation plan documented in WEBSITE_HOSTING_PLAN.md.
+Selected Netlify as the recommended hosting provider for the MyMiamiDoctor website with a detailed step-by-step implementation plan documented in WEBSITE_HOSTING_PLAN.md.
 
 ### Rationale
-1. **Next.js Optimization**:
-   - Vercel is developed by the same team behind Next.js
-   - Provides optimized deployment and runtime environment specifically for Next.js applications
-   - Automatic handling of server-side rendering (SSR) and API routes
+1. **Next.js Support**:
+   - Good support for Next.js applications with minimal configuration
+   - Handles server-side rendering (SSR) and API routes effectively
+   - Automatic build detection for Next.js projects
 
 2. **Ease of Use**:
-   - Simplest deployment process among all options considered
+   - Simple deployment process with intuitive UI
    - User-friendly dashboard suitable for clients with limited technical experience
    - Seamless GitHub integration for continuous deployment
 
 3. **Performance and Reliability**:
-   - Global edge network for fast content delivery
+   - Global CDN for fast content delivery
    - Automatic SSL certificate provisioning
    - High reliability and uptime guarantees
    - Built-in analytics and monitoring
 
 4. **Cost-Effectiveness**:
-   - Pro plan ($20/month) provides all necessary features for a professional healthcare website
+   - Pro plan ($19/month) provides all necessary features for a professional healthcare website
    - No additional costs for SSL certificates or CDN services
    - Predictable pricing model
 
+5. **Integrated CMS**:
+   - Netlify CMS is already integrated into the project
+   - Seamless content management workflow
+   - Git-based content storage with no additional database required
+
 ### Alternatives Considered
-1. **Netlify**:
-   - Very similar to Vercel in ease of use
-   - Requires more configuration for Next.js specific features
-   - Better form handling, but less optimized for Next.js
+1. **Vercel**:
+   - Developed by the same team behind Next.js
+   - Excellent Next.js optimization but similar features to Netlify
+   - Slightly higher cost for Pro plan ($20/month)
 
 2. **DigitalOcean App Platform**:
    - More flexible but requires more technical knowledge
@@ -213,7 +218,8 @@ Implemented Netlify CMS integration for content management with a client-side co
    - Easy to extend with custom widgets if needed
 
 4. **Deployment Considerations**:
-   - Works with the recommended Vercel hosting
+   - Works perfectly with Netlify hosting
+   - Integrated with the same platform for seamless content management
    - No additional backend services required
    - Seamless integration with continuous deployment
 
@@ -264,3 +270,153 @@ Fixed a Next.js build error in the contact page by removing the metadata export 
    - The solution follows Next.js best practices
    - Makes the codebase more consistent with the framework's architecture
    - Reduces potential for similar errors in the future
+
+## 2/27/2025 - Netlify Deployment Configuration
+
+### Decision
+Created a comprehensive Netlify deployment configuration with netlify.toml and updated all documentation to focus on Netlify as the hosting provider instead of Vercel.
+
+### Rationale
+1. **Netlify Integration Benefits**:
+   - Seamless integration with the existing Netlify CMS implementation
+   - Simplified deployment and content management workflow
+   - Better compatibility with the project's requirements
+   - Cost-effective solution with all necessary features
+
+2. **Next.js Compatibility**:
+   - Netlify provides good support for Next.js applications
+   - Configuration optimized for Next.js build process
+   - Proper handling of server-side rendering and API routes
+
+3. **Security and Performance**:
+   - Implemented comprehensive security headers
+   - Configured asset optimization for CSS, JS, and images
+   - Set up proper redirects for API routes and authentication
+
+### Implementation Approach
+1. **Documentation Updates**:
+   - Rewrote WEBSITE_HOSTING_PLAN.md to focus on Netlify
+   - Updated memory bank files to reflect the change in hosting provider
+   - Ensured consistency across all documentation
+
+2. **Configuration File Creation**:
+   - Created netlify.toml with build settings for Next.js
+   - Configured environment variables
+   - Set up context-specific build commands
+   - Added security headers and redirects
+   - Configured asset processing optimizations
+
+3. **CMS Compatibility**:
+   - Updated package.json to use Decap CMS (formerly Netlify CMS)
+   - Ensured compatibility with React 18
+   - Maintained existing CMS functionality
+
+### Considerations
+1. **Migration Path**:
+   - Smooth transition from development to production
+   - No disruption to existing development workflow
+   - Compatible with continuous integration processes
+
+2. **Performance Optimization**:
+   - Global CDN for fast content delivery
+   - Asset optimization for improved load times
+   - Proper caching configuration
+
+3. **Security**:
+   - Comprehensive security headers
+   - Automatic SSL certificate provisioning
+   - Secure authentication with Netlify Identity
+
+4. **Maintainability**:
+   - Clear configuration file structure
+   - Well-documented settings
+   - Follows Netlify best practices
+
+## 2/27/2025 - Netlify Deployment Guide Creation
+
+### Decision
+Created a comprehensive Netlify deployment guide (NETLIFY_DEPLOYMENT_GUIDE.md) with detailed instructions for connecting GitHub to Netlify, configuring build settings, setting up environment variables, and testing the deployment.
+
+### Rationale
+1. **Deployment Process Standardization**:
+   - Ensures consistent deployment process
+   - Provides clear steps for initial and future deployments
+   - Reduces risk of configuration errors
+
+2. **Knowledge Transfer**:
+   - Enables team members or clients to understand the deployment process
+   - Serves as reference documentation for future maintenance
+   - Reduces dependency on specific individuals for deployment knowledge
+
+3. **Testing Protocol**:
+   - Establishes a standardized testing approach for deployments
+   - Ensures all critical functionality is verified
+   - Provides a checklist for post-deployment verification
+
+### Implementation Approach
+1. **Comprehensive Documentation**:
+   - Created step-by-step instructions for the entire deployment process
+   - Included screenshots and examples where appropriate
+   - Organized content in a logical sequence
+
+2. **Configuration Details**:
+   - Specified exact build settings required for Next.js on Netlify
+   - Documented environment variable requirements
+   - Provided guidance on security best practices
+
+3. **Testing Protocol**:
+   - Developed a thorough testing checklist
+   - Included verification steps for all critical functionality
+   - Covered multilingual testing requirements
+
+4. **Troubleshooting Guidance**:
+   - Added common issues and their solutions
+   - Provided debugging strategies for deployment problems
+   - Included resources for further assistance
+
+### Considerations
+1. **User Experience**:
+   - Guide written for users with varying technical expertise
+   - Clear, non-technical language where possible
+   - Visual aids to supplement written instructions
+
+2. **Completeness**:
+   - Covers the entire deployment lifecycle
+   - Includes post-deployment configuration
+   - Addresses ongoing maintenance needs
+
+3. **Adaptability**:
+   - Structured to accommodate future changes to the deployment process
+   - Modular sections that can be updated independently
+   - Version-neutral where possible to reduce maintenance
+
+4. **Security**:
+   - Emphasis on proper handling of sensitive information
+   - Guidance on environment variable encryption
+   - Best practices for access control
+
+## 2/27/2025 - Netlify Build Dependency Resolution
+
+### Decision
+Modified the build script in package.json to use the `--legacy-peer-deps` flag to resolve dependency conflicts between React 18 and Netlify CMS.
+
+### Rationale
+1. **Dependency Conflict**:
+   - The project uses React 18.2.0 and @decapcms/app 3.1.3
+   - Netlify's build process was encountering a conflict with netlify-cms-app@2.15.72 which requires React 16 or 17
+   - This conflict was preventing successful deployment
+
+2. **Solution Options Considered**:
+   - Downgrading React to version 17 (rejected as it would require significant changes to the codebase)
+   - Using a different CMS (rejected as Netlify CMS integration was already implemented)
+   - Adding `--legacy-peer-deps` flag to the build command (selected as the least disruptive solution)
+
+3. **Implementation**:
+   - Updated the build script in package.json to include `npm install --legacy-peer-deps` before running Next.js build
+   - This allows npm to install packages with conflicting peer dependencies
+   - Maintains compatibility with the existing codebase
+
+### Considerations
+- This is a temporary solution until Netlify CMS fully supports React 18
+- The `--legacy-peer-deps` flag may mask other dependency issues
+- Future updates should monitor for a more permanent solution

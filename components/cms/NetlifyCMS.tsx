@@ -15,8 +15,9 @@ declare global {
 }
 
 /**
- * NetlifyCMS component handles Netlify Identity integration
- * This component should be included in the app layout to enable Netlify CMS functionality
+ * DecapCMS component handles Netlify Identity integration
+ * This component should be included in the app layout to enable Decap CMS functionality
+ * (Decap CMS is the community fork of Netlify CMS with better React 18 support)
  */
 export const NetlifyCMS = () => {
   const router = useRouter();

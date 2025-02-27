@@ -33,22 +33,6 @@ Because of these features, the website requires hosting services that properly s
 
 ### Budget Options ($5-15/month)
 
-#### Vercel
-- **Price Range**: Free tier available, $20/month for Pro plan
-- **Pros**:
-  - Built by the creators of Next.js
-  - Seamless deployment from GitHub
-  - Automatic preview deployments
-  - Excellent performance optimization
-  - Great development experience
-  - Free SSL certificates
-  - Content Delivery Network (CDN) included
-- **Cons**:
-  - Higher latency for API routes on free tier
-  - Limited build minutes on free tier
-- **Best For**: Developers who want the simplest deployment experience with excellent performance
-- **Ease of Use**: ★★★★★ (Very easy)
-
 #### Netlify
 - **Price Range**: Free tier available, $19/month for Pro plan
 - **Pros**:
@@ -58,6 +42,7 @@ Because of these features, the website requires hosting services that properly s
   - Free SSL certificates
   - Global CDN
   - Form handling built-in
+  - Netlify CMS integration
 - **Cons**:
   - Slightly more configuration needed for Next.js
   - Serverless function limitations on free tier
@@ -75,7 +60,7 @@ Because of these features, the website requires hosting services that properly s
   - Global CDN
   - Easy scaling options
 - **Cons**:
-  - Requires more technical knowledge than Vercel/Netlify
+  - Requires more technical knowledge than Netlify
   - Less Next.js-specific optimization
 - **Best For**: Teams who already use DigitalOcean services
 - **Ease of Use**: ★★★☆☆ (Moderate)
@@ -119,20 +104,21 @@ Because of these features, the website requires hosting services that properly s
   - Free SSL certificates
   - Authentication services included
 - **Cons**:
-  - More complex than Vercel/Netlify
+  - More complex than Netlify
   - Next.js support requires extra configuration
 - **Best For**: Teams already using Microsoft Azure
 - **Ease of Use**: ★★★☆☆ (Moderate)
 
 ### Recommendation for MyMiamiDoctor Website
 
-Based on the project requirements and prioritizing ease of use, reliability, and performance, **Vercel** is the recommended hosting provider for the MyMiamiDoctor website for the following reasons:
+Based on the project requirements and prioritizing ease of use, reliability, and performance, **Netlify** is the recommended hosting provider for the MyMiamiDoctor website for the following reasons:
 
-1. **Optimized for Next.js**: As the creators of Next.js, Vercel provides the best support and performance for Next.js applications.
-2. **Ease of Use**: Vercel has the simplest deployment process, making it ideal for users with limited technical experience.
+1. **Excellent Next.js Support**: Netlify provides good support for Next.js applications with minimal configuration.
+2. **Ease of Use**: Netlify has a simple deployment process, making it ideal for users with limited technical experience.
 3. **Professional Features**: Enterprise-grade CDN, analytics, and performance monitoring are included.
 4. **Reliability**: High uptime guarantees and excellent support.
-5. **Cost-Effective**: The Pro plan ($20/month) provides all necessary features for a professional medical website.
+5. **Cost-Effective**: The Pro plan ($19/month) provides all necessary features for a professional medical website.
+6. **Integrated CMS**: Netlify CMS is already integrated into the project, making content management seamless.
 
 ## Domain Connection Process
 
@@ -149,66 +135,68 @@ If you need to purchase a domain name:
 3. Complete the purchase process
 4. Verify your contact information (required by ICANN regulations)
 
-### Connecting Your Existing Domain to Vercel
+### Connecting Your Existing Domain to Netlify
 
-1. **Log in to Vercel**:
-   - Go to [vercel.com](https://vercel.com) and sign in or create an account
+1. **Log in to Netlify**:
+   - Go to [netlify.com](https://netlify.com) and sign in or create an account
    - Connect your GitHub account when prompted
 
 2. **Import Your Project**:
-   - Click "Import Project"
-   - Select "Import Git Repository"
-   - Choose the MyMiamiDoctor repository
-   - Vercel will automatically detect the Next.js project
+   - Click "Add new site"
+   - Select "Import an existing project"
+   - Choose "GitHub" as your Git provider
+   - Select the MyMiamiDoctor repository
+   - Netlify will detect the Next.js project
 
 3. **Configure Project Settings**:
-   - Select the appropriate team (or create one)
-   - Keep the default build settings (Vercel detects Next.js automatically)
-   - Click "Deploy"
+   - Keep the default build settings (Netlify should detect Next.js automatically)
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+   - Click "Deploy site"
 
 4. **Add Your Domain**:
-   - After deployment, go to "Settings" > "Domains"
-   - Click "Add Domain"
+   - After deployment, go to "Site settings" > "Domain management"
+   - Click "Add custom domain"
    - Enter your domain name (e.g., mymiamidoctor.com)
-   - Click "Add"
+   - Click "Verify"
 
 5. **Configure DNS Records**:
-   - Vercel will provide instructions for configuring your domain
+   - Netlify will provide instructions for configuring your domain
    - You have two options:
 
-#### Option 1: Using Vercel as Your DNS Provider (Recommended for simplicity)
-   - In your domain registrar account, update the nameservers to point to Vercel's nameservers
-   - Vercel will provide the specific nameserver addresses
+#### Option 1: Using Netlify as Your DNS Provider (Recommended for simplicity)
+   - In your domain registrar account, update the nameservers to point to Netlify's nameservers
+   - Netlify will provide the specific nameserver addresses (typically ns1.netlify.com, ns2.netlify.com, etc.)
    - Changes typically take 24-48 hours to propagate
 
 #### Option 2: Keeping Your Current DNS Provider
-   - In your domain registrar's DNS settings, add the CNAME and A records provided by Vercel
-   - CNAME record for 'www' subdomain pointing to Vercel
-   - A records for the root domain pointing to Vercel's IP addresses
+   - In your domain registrar's DNS settings, add the CNAME and A records provided by Netlify
+   - CNAME record for 'www' subdomain pointing to your Netlify site
+   - A records for the root domain pointing to Netlify's IP addresses
    - Changes typically take 1-24 hours to propagate
 
 6. **Verify Domain Connection**:
-   - Vercel will automatically check if the domain is properly connected
-   - Once verified, Vercel will automatically issue an SSL certificate
+   - Netlify will automatically check if the domain is properly connected
+   - Once verified, Netlify will automatically issue an SSL certificate
 
 ## Website Deployment Process
 
 ### Initial Deployment
 
-If you followed the steps above to connect your domain, your website is already deployed! Vercel automatically builds and deploys your Next.js application.
+If you followed the steps above to connect your domain, your website is already deployed! Netlify automatically builds and deploys your Next.js application.
 
 ### Manual Deployment from Local Environment
 
 If you need to deploy from your local environment:
 
-1. **Install Vercel CLI**:
+1. **Install Netlify CLI**:
    ```
-   npm install -g vercel
+   npm install -g netlify-cli
    ```
 
-2. **Login to Vercel**:
+2. **Login to Netlify**:
    ```
-   vercel login
+   netlify login
    ```
 
 3. **Navigate to Your Project Directory**:
@@ -216,31 +204,36 @@ If you need to deploy from your local environment:
    cd path/to/mymiamidoctor
    ```
 
-4. **Deploy the Project**:
+4. **Initialize Netlify in Your Project**:
    ```
-   vercel
+   netlify init
    ```
    
-5. **Connect to Production Environment**:
+5. **Deploy the Project**:
    ```
-   vercel --prod
+   netlify deploy
+   ```
+   
+6. **Deploy to Production**:
+   ```
+   netlify deploy --prod
    ```
 
 ### Setting Up Continuous Deployment
 
 For automatic deployments whenever you push changes to GitHub:
 
-1. In Vercel dashboard, go to your project
-2. Click "Settings" > "Git Integration"
-3. Ensure "Production Branch" is set to your main branch (usually 'main' or 'master')
-4. Enable "Auto Deploy" if it's not already enabled
+1. In Netlify dashboard, go to your site
+2. Click "Site settings" > "Build & deploy" > "Continuous Deployment"
+3. Ensure "Deploy automatically" is enabled for your main branch (usually 'main' or 'master')
+4. Configure build hooks if needed for triggering builds from external services
 
 ## Configuration and Optimization
 
 ### Environment Variables
 
-1. In Vercel dashboard, go to your project
-2. Click "Settings" > "Environment Variables"
+1. In Netlify dashboard, go to your site
+2. Click "Site settings" > "Build & deploy" > "Environment"
 3. Add any necessary environment variables:
    - API keys
    - External service credentials
@@ -248,29 +241,29 @@ For automatic deployments whenever you push changes to GitHub:
 
 ### Performance Optimization
 
-Vercel automatically applies many optimizations, but you can further optimize:
+Netlify provides several optimization features:
 
-1. **Enable Caching**:
-   - Go to "Settings" > "General"
-   - Ensure "Caching" is enabled
+1. **Enable Asset Optimization**:
+   - Go to "Site settings" > "Build & deploy" > "Asset optimization"
+   - Enable CSS, JS, and image optimization
 
-2. **Configure Image Optimization**:
-   - Next.js Image Optimization is enabled by default on Vercel
-   - No additional configuration is typically needed
+2. **Configure Next.js Image Optimization**:
+   - Add the necessary configuration in `next.config.mjs` for Netlify image optimization
+   - Consider using Netlify's image transformation service for additional optimizations
 
 3. **Edge Network**:
-   - Vercel automatically deploys your site to their global edge network
-   - No configuration needed
+   - Netlify automatically deploys your site to their global CDN
+   - No additional configuration needed
 
 ### Security Configuration
 
 1. **SSL/HTTPS**:
-   - Vercel automatically provisions SSL certificates
+   - Netlify automatically provisions SSL certificates
    - HTTPS is enabled by default
 
 2. **HTTP Headers**:
-   - In your Next.js project, configure security headers in `next.config.mjs`
-   - Vercel will automatically apply these headers
+   - Configure security headers in `netlify.toml` file
+   - Add headers for content security policy, frame options, etc.
 
 ## Verification and Testing
 
@@ -292,7 +285,7 @@ Vercel automatically applies many optimizations, but you can further optimize:
 ### Advanced Testing
 
 1. **Performance Testing**:
-   - Use Vercel Analytics (available in your Vercel dashboard)
+   - Use Netlify Analytics (available in paid plans)
    - Check Google PageSpeed Insights: https://pagespeed.web.dev/
    - Verify Core Web Vitals metrics
 
@@ -314,11 +307,12 @@ Vercel automatically applies many optimizations, but you can further optimize:
 ### Regular Maintenance Tasks
 
 1. **Content Updates**:
+   - Use Netlify CMS for content updates
    - Push changes to your GitHub repository
-   - Vercel will automatically deploy updates
+   - Netlify will automatically deploy updates
 
 2. **Monitoring**:
-   - Check Vercel dashboard regularly for any issues
+   - Check Netlify dashboard regularly for any issues
    - Set up email notifications for deployment failures
 
 3. **Security Updates**:
@@ -337,22 +331,22 @@ Vercel automatically applies many optimizations, but you can further optimize:
 
 ### Support Resources
 
-1. **Vercel Documentation**:
-   - [Vercel Docs](https://vercel.com/docs)
+1. **Netlify Documentation**:
+   - [Netlify Docs](https://docs.netlify.com/)
    - [Next.js Docs](https://nextjs.org/docs)
 
 2. **Support Channels**:
-   - Vercel support via dashboard
+   - Netlify support via dashboard
    - Next.js community support via GitHub or Discord
 
 ## Timeline and Checklist
 
 ### Week 1: Initial Setup
 
-- [ ] Select and sign up for Vercel account
-- [ ] Connect GitHub repository to Vercel
+- [ ] Select and sign up for Netlify account
+- [ ] Connect GitHub repository to Netlify
 - [ ] Deploy initial version of website
-- [ ] Connect domain name to Vercel
+- [ ] Connect domain name to Netlify
 - [ ] Verify SSL certificate is active
 
 ### Week 2: Testing and Optimization
@@ -365,7 +359,7 @@ Vercel automatically applies many optimizations, but you can further optimize:
 
 ### Week 3: Client Handover
 
-- [ ] Create client access to Vercel dashboard (if needed)
+- [ ] Create client access to Netlify dashboard (if needed)
 - [ ] Provide documentation for content updates
 - [ ] Train client on basic maintenance tasks
 - [ ] Perform final verification of all features
@@ -373,6 +367,6 @@ Vercel automatically applies many optimizations, but you can further optimize:
 
 ## Conclusion
 
-Following this hosting plan will ensure a professional, reliable, and easy-to-maintain deployment of the MyMiamiDoctor website. The recommended Vercel hosting provides an optimal balance of performance, ease of use, and professional features that align with the project requirements.
+Following this hosting plan will ensure a professional, reliable, and easy-to-maintain deployment of the MyMiamiDoctor website. The recommended Netlify hosting provides an optimal balance of performance, ease of use, and professional features that align with the project requirements.
 
 By using continuous deployment from GitHub, future updates will be seamless and risk-free, allowing for rapid iteration and improvements to the website as needed.
