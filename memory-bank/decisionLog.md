@@ -89,7 +89,7 @@ Selected Vercel as the recommended hosting provider for the MyMiamiDoctor websit
 Identified specific categories of files that can be safely deleted to reduce storage size, and created a PowerShell script (cleanup-storage.ps1) to automate the deletion process.
 
 ### Rationale
-1. **Duplicate Files**: 
+1. **Duplicate Files**:
    - `styles/forensic-findings.md` is an exact duplicate of the root `forensic-findings.md`
    - Keeping duplicate files wastes storage and creates confusion about which is the authoritative version
 
@@ -125,3 +125,142 @@ Created a PowerShell script with safety checks that:
 - All deleted files are either duplicates, testing resources, or temporary files
 - If needed, files can be restored from version control
 - The cleanup focuses on reducing storage size without affecting application functionality
+
+## 2/27/2025 - Netlify CMS Integration
+
+### Decision
+Implemented Netlify CMS integration for content management with a client-side component approach and detailed documentation.
+
+### Rationale
+1. **Content Management Needs**:
+   - The website requires a user-friendly way for non-technical users to update content
+   - Content needs to be structured and consistent across the site
+   - Multilingual content (English and Russian) needs to be managed efficiently
+
+2. **Netlify CMS Benefits**:
+   - Git-based content management (no database required)
+   - User-friendly interface for content editors
+   - Markdown and structured data support
+   - Built-in media management
+   - Editorial workflow for content review
+   - Multilingual content support
+
+3. **Integration with Next.js**:
+   - Works well with static site generation and server-side rendering
+   - Content stored as files in the repository
+   - Compatible with the project's file-based content structure
+
+### Alternatives Considered
+1. **Headless CMS (Contentful, Sanity, etc.)**:
+   - More powerful content modeling
+   - Better for large teams and complex content structures
+   - Requires external service and additional costs
+   - More complex to set up and maintain
+
+2. **Custom Admin Interface**:
+   - Could be tailored exactly to project needs
+   - Would require significant development time
+   - Would need ongoing maintenance
+   - No built-in editorial workflow or user management
+
+3. **WordPress with REST API**:
+   - Familiar interface for many content editors
+   - Requires separate WordPress installation
+   - More complex architecture with potential security concerns
+   - Higher hosting and maintenance costs
+
+### Implementation Approach
+1. **Client-Side Integration**:
+   - Created NetlifyCMS.tsx component for Netlify Identity integration
+   - Dynamically imported in app/layout.tsx to avoid SSR issues
+   - Added component to layout body for proper initialization
+   - Configured to handle login/logout redirects
+
+2. **Admin Interface Enhancement**:
+   - Enhanced admin/index.html with improved styling and configuration
+   - Added custom loading state with spinner for better UX
+   - Implemented custom styling to match site branding
+   - Added error handling for robustness
+   - Registered preview styles to match the site's design
+
+3. **Content Structure**:
+   - Organized content into collections (blog, services, pages, settings)
+   - Defined fields for each content type with validation
+   - Implemented multilingual support for text fields
+   - Set up media handling for images
+
+4. **Documentation**:
+   - Created NETLIFY_CMS_INTEGRATION.md reference document
+   - Updated Memory Bank files with implementation details
+   - Documented the content structure and workflow
+
+### Considerations
+1. **Authentication and Security**:
+   - Using Netlify Identity for user authentication
+   - Git Gateway for secure repository access
+   - Role-based access control for content editors
+
+2. **Content Editor Experience**:
+   - Simplified interface focused on content editing
+   - Preview capability for content changes
+   - Structured forms for consistent content entry
+   - Media library for image management
+
+3. **Developer Experience**:
+   - Content changes tracked in version control
+   - No additional database to manage
+   - Clear separation between content and code
+   - Easy to extend with custom widgets if needed
+
+4. **Deployment Considerations**:
+   - Works with the recommended Vercel hosting
+   - No additional backend services required
+   - Seamless integration with continuous deployment
+
+## 2/27/2025 - Next.js Build Error Fix
+
+### Decision
+Fixed a Next.js build error in the contact page by removing the metadata export while keeping the "use client" directive, and relying on the separate metadata.ts file.
+
+### Rationale
+1. **Next.js Architecture Requirements**:
+   - Next.js does not allow exporting metadata from a component marked with "use client"
+   - The error was preventing the application from building successfully
+   - The contact page needed client-side interactivity for the form functionality
+
+2. **Metadata Management in Next.js**:
+   - Next.js provides a pattern for separating metadata from client components
+   - The project already had a separate metadata.ts file for the contact page
+   - This separation follows Next.js best practices for app router architecture
+
+### Implementation Approach
+1. **Code Analysis**:
+   - Identified the conflicting code in app/contact/page.tsx
+   - Confirmed the existence of app/contact/metadata.ts with the required metadata
+   - Verified that the metadata in both files was similar but not identical
+
+2. **Solution Implementation**:
+   - Removed the metadata import and export from app/contact/page.tsx
+   - Kept the "use client" directive to maintain client-side functionality
+   - Relied on the existing metadata.ts file for SEO and page metadata
+
+3. **Documentation**:
+   - Updated Memory Bank files to document the issue and solution
+   - Added the fix to the progress tracking
+
+### Considerations
+1. **Next.js App Router Architecture**:
+   - The app router in Next.js 13+ has specific patterns for metadata
+   - Server components can export metadata directly
+   - Client components must use separate metadata files
+   - This architecture improves performance by keeping metadata on the server
+
+2. **SEO Impact**:
+   - Ensured that the contact page still has proper metadata for SEO
+   - The metadata.ts file provides title, description, and keywords
+   - No negative impact on search engine visibility
+
+3. **Maintainability**:
+   - The solution follows Next.js best practices
+   - Makes the codebase more consistent with the framework's architecture
+   - Reduces potential for similar errors in the future

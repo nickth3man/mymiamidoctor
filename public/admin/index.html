@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager | MyMiamiDoctor</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <!-- Custom admin styles -->
+    <style>
+      /* Custom styles for the admin interface */
+      :root {
+        --primary-color: #0070f3;
+        --secondary-color: #ff4081;
+      }
+      
+      /* Override Netlify CMS default styles */
+      .nc-appHeader-content {
+        background-color: var(--primary-color) !important;
+      }
+      
+      .nc-appHeader-button:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+      }
+      
+      /* Custom loading state */
+      .cms-loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        background-color: #f9f9f9;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+      
+      .cms-loading {
+        text-align: center;
+      }
+      
+      .cms-loading h2 {
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        color: var(--primary-color);
+      }
+      
+      .cms-loading-spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid var(--primary-color);
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 20px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+    
+    <!-- Include the script that enables Netlify Identity on this page. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- Loading state that will be shown until CMS loads -->
+    <div class="cms-loading-container">
+      <div class="cms-loading">
+        <div class="cms-loading-spinner"></div>
+        <h2>Loading MyMiamiDoctor CMS...</h2>
+      </div>
+    </div>
+    
+    <!-- Include the script that builds the page and powers Netlify CMS -->
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    
+    <!-- Custom CMS configuration -->
+    <script>
+      // Remove loading screen when CMS is ready
+      window.addEventListener('load', function() {
+        const loadingContainer = document.querySelector('.cms-loading-container');
+        if (loadingContainer) {
+          setTimeout(function() {
+            loadingContainer.style.opacity = '0';
+            loadingContainer.style.transition = 'opacity 0.5s ease';
+            setTimeout(function() {
+              loadingContainer.style.display = 'none';
+            }, 500);
+          }, 1000);
+        }
+      });
+      
+      // Custom preview styles to match the site's design
+      CMS.registerPreviewStyle("/globals.css");
+      
+      // Custom error handling
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.error('CMS Error:', message, error);
+        // You could add custom error reporting here
+        return true;
+      };
+      
+      // Initialize Netlify Identity
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', user => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

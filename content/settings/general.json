@@ -1,0 +1,14 @@
+{
+  "siteTitle": {
+    "en": "MyMiamiDoctor",
+    "ru": "МойМайамиДоктор"
+  },
+  "siteDescription": {
+    "en": "Professional healthcare services in Miami, offering telehealth consultations, prescription renewals, and follow-up visits.",
+    "ru": "Профессиональные медицинские услуги в Майами, предлагающие телемедицинские консультации, продление рецептов и последующие визиты."
+  },
+  "logo": "/images/logo.png",
+  "favicon": "/favicon.ico",
+  "primaryColor": "#0070f3",
+  "secondaryColor": "#ff4081"
+}
