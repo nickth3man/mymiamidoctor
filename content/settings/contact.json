@@ -1,0 +1,19 @@
+{
+  "email": "info@mymiamidoctor.com",
+  "phone": "+1 (305) 555-1234",
+  "address": {
+    "en": "123 Healthcare Ave, Suite 456, Miami, FL 33101",
+    "ru": "123 Хелскеа Авеню, Офис 456, Майами, Флорида 33101"
+  },
+  "googleMapsLink": "https://maps.google.com/?q=123+Healthcare+Ave+Miami+FL+33101",
+  "hours": {
+    "en": "Monday - Friday: 9:00 AM - 5:00 PM\nSaturday: 10:00 AM - 2:00 PM\nSunday: Closed",
+    "ru": "Понедельник - Пятница: 9:00 - 17:00\nСуббота: 10:00 - 14:00\nВоскресенье: Закрыто"
+  },
+  "socialMedia": {
+    "facebook": "https://facebook.com/mymiamidoctor",
+    "twitter": "https://twitter.com/mymiamidoctor",
+    "instagram": "https://instagram.com/mymiamidoctor",
+    "linkedin": "https://linkedin.com/company/mymiamidoctor"
+  }
+}

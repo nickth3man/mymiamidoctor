@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react';
-import { 
-  Heading, 
-  Text, 
+import {
+  Heading,
+  Text,
   Button,
   Container,
   Section,
@@ -17,14 +17,7 @@ import {
 import { TextArea } from '../../components/ui/TextArea';
 import { Radio } from '../../components/ui/Radio';
 import { Checkbox } from '../../components/ui/Checkbox';
-import type { Metadata } from "next";
 import type { TextFieldType } from '../../components/ui/TextField';
-
-export const metadata: Metadata = {
-  title: "Contact & Appointments | MyMiamiDoctor",
-  description: "Schedule an appointment with Dr. Miami. Contact us for general inquiries, appointment scheduling, or to learn more about our services.",
-  keywords: "doctor appointment Miami, schedule doctor visit, contact Miami doctor, medical appointment",
-};
 
 export default function ContactPage() {
   return (

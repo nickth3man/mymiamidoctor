@@ -2,19 +2,13 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { 
-  TextField, 
-  FormGroup, 
-  Button 
+import {
+  TextField,
+  FormGroup,
+  Button
 } from "@/components";
 
-// Metadata needs to be in a separate file when using 'use client' directive
-// This is exported as a separate variable for the layout or page.js to use
-export const pageMetadata = {
-  title: "Patient Portal Coming Soon | Dr. Marina Gafanovich",
-  description: "Our patient portal is coming soon! Sign up to be notified when our secure patient portal launches, offering convenient access to your health records and more.",
-  keywords: "patient portal Miami, online medical records, Dr. Gafanovich patient portal, secure health portal, medical records access",
-};
+// Metadata is defined in the separate metadata.ts file
 
 interface NotificationFormData {
   fullName: string;

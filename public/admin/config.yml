@@ -1,0 +1,92 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+media_folder: "public/images/uploads" # Media files will be stored in the repo under public/images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+# Enable editorial workflow for content review before publishing
+publish_mode: editorial_workflow
+
+# Enable localization for multilingual content (English and Russian)
+locale: 'en'
+locales: ['en', 'ru']
+
+collections:
+  # Blog posts collection
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog" # We'll create this directory to store markdown files
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Author", name: "author", widget: "string", default: "MyMiamiDoctor Team"}
+      - {label: "Category", name: "category", widget: "select", options: ["Health Tips", "Medical News", "Services", "Patient Stories"]}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Summary", name: "summary", widget: "text", i18n: true}
+      - {label: "Body", name: "body", widget: "markdown", i18n: true}
+      - {label: "Tags", name: "tags", widget: "list", default: ["health"]}
+
+  # Services collection
+  - name: "services"
+    label: "Services"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Service ID", name: "serviceId", widget: "string", pattern: ['^[a-z0-9-]+$', "Must be lowercase letters, numbers, and hyphens only"]}
+      - {label: "Short Description", name: "shortDescription", widget: "text", i18n: true}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      - {label: "Icon", name: "icon", widget: "image", required: false, hint: "Small icon for service listings"}
+      - {label: "Order", name: "order", widget: "number", default: 1, value_type: "int", min: 1}
+      - {label: "Body", name: "body", widget: "markdown", i18n: true}
+      - {label: "Show on Homepage", name: "showOnHomepage", widget: "boolean", default: true}
+
+  # Pages collection for static pages
+  - name: "pages"
+    label: "Pages"
+    folder: "content/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Page ID", name: "pageId", widget: "string", pattern: ['^[a-z0-9-]+$', "Must be lowercase letters, numbers, and hyphens only"]}
+      - {label: "Meta Description", name: "metaDescription", widget: "text", i18n: true}
+      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown", i18n: true}
+      - {label: "Show in Navigation", name: "showInNav", widget: "boolean", default: true}
+      - {label: "Navigation Order", name: "navOrder", widget: "number", default: 100, value_type: "int"}
+
+  # Settings collection for global site settings
+  - name: "settings"
+    label: "Settings"
+    files:
+      - name: "general"
+        label: "Site Settings"
+        file: "content/settings/general.json"
+        fields:
+          - {label: "Site Title", name: "siteTitle", widget: "string", i18n: true}
+          - {label: "Site Description", name: "siteDescription", widget: "text", i18n: true}
+          - {label: "Logo", name: "logo", widget: "image"}
+          - {label: "Favicon", name: "favicon", widget: "image"}
+          - {label: "Primary Color", name: "primaryColor", widget: "color", default: "#0070f3"}
+          - {label: "Secondary Color", name: "secondaryColor", widget: "color", default: "#ff4081"}
+      
+      - name: "contact"
+        label: "Contact Information"
+        file: "content/settings/contact.json"
+        fields:
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Address", name: "address", widget: "text", i18n: true}
+          - {label: "Google Maps Link", name: "googleMapsLink", widget: "string"}
+          - {label: "Hours of Operation", name: "hours", widget: "markdown", i18n: true}
+          - {label: "Social Media", name: "socialMedia", widget: "object", fields: [
+              {label: "Facebook", name: "facebook", widget: "string", required: false},
+              {label: "Twitter", name: "twitter", widget: "string", required: false},
+              {label: "Instagram", name: "instagram", widget: "string", required: false},
+              {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+            ]}

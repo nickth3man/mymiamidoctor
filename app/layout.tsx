@@ -12,6 +12,13 @@ const PerformanceMonitor = dynamic(
   { ssr: false }
 );
 
+// Dynamically import the NetlifyCMS component with no SSR
+// This ensures it only runs on the client side
+const NetlifyCMS = dynamic(
+  () => import("../components/cms/NetlifyCMS"),
+  { ssr: false }
+);
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -46,6 +53,9 @@ export default function RootLayout({
           <PerformanceMonitor
             sendToAnalytics={process.env.NODE_ENV === 'production'}
           />
+          
+          {/* Netlify CMS integration (non-visual component) */}
+          <NetlifyCMS />
           
           <Navigation />
           {children}
