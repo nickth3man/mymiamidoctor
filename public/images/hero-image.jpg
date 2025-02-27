@@ -1,6 +1,39 @@
 <svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="800" fill="#e6f7ff"/>
-  <rect x="450" y="340" width="300" height="120" fill="#cce6ff"/>
-  <text x="600" y="400" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" dominant-baseline="middle" fill="#3399ff">Hero Image Placeholder</text>
-  <text x="600" y="430" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle" fill="#666">Miami Doctor Healthcare</text>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00A8E8;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#F4E1C1;stop-opacity:0.4" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#002D62;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#002D62;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#grad1)"/>
+  
+  <!-- Medical symbols and elements -->
+  <circle cx="200" cy="200" r="80" fill="#ffffff" opacity="0.2"/>
+  <circle cx="1000" cy="600" r="120" fill="#ffffff" opacity="0.2"/>
+  <circle cx="900" cy="150" r="50" fill="#ffffff" opacity="0.2"/>
+  
+  <!-- Medical cross -->
+  <rect x="950" y="100" width="60" height="160" rx="10" fill="#00A8E8" opacity="0.7"/>
+  <rect x="900" y="150" width="160" height="60" rx="10" fill="#00A8E8" opacity="0.7"/>
+  
+  <!-- Heartbeat line -->
+  <path d="M100,500 L200,500 L250,400 L300,600 L350,500 L400,500 L450,450 L500,550 L550,500 L650,500" 
+        stroke="#FF4F70" stroke-width="6" fill="none" stroke-linecap="round"/>
+  
+  <!-- Content area -->
+  <rect x="100" y="200" width="500" height="300" rx="15" fill="url(#grad2)"/>
+  
+  <!-- Text content -->
+  <text x="350" y="280" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">Dr. Marina Gafanovich</text>
+  <text x="350" y="340" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">Miami Primary Care</text>
+  <text x="350" y="390" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" dominant-baseline="middle" fill="#F4E1C1">Personalized Healthcare for Your Family</text>
+  
+  <!-- Button-like element -->
+  <rect x="200" y="430" width="300" height="50" rx="25" fill="#00A8E8"/>
+  <text x="350" y="455" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#ffffff">Book an Appointment</text>
 </svg> 

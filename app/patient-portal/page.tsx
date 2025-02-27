@@ -1,13 +1,112 @@
-import Link from "next/link";
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
+import Link from "next/link";
+import React, { useState } from "react";
+import { 
+  TextField, 
+  FormGroup, 
+  Button 
+} from "@/components";
+
+// Metadata needs to be in a separate file when using 'use client' directive
+// This is exported as a separate variable for the layout or page.js to use
+export const pageMetadata = {
   title: "Patient Portal Coming Soon | Dr. Marina Gafanovich",
   description: "Our patient portal is coming soon! Sign up to be notified when our secure patient portal launches, offering convenient access to your health records and more.",
   keywords: "patient portal Miami, online medical records, Dr. Gafanovich patient portal, secure health portal, medical records access",
 };
 
+interface NotificationFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  isExistingPatient: boolean;
+}
+
 export default function PatientPortal() {
+  // Form state
+  const [formState, setFormState] = useState<NotificationFormData>({
+    fullName: '',
+    email: '',
+    phone: '',
+    isExistingPatient: false
+  });
+
+  // Form validation and submission states
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  // Handle form input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    
+    // Type assertion for checkbox
+    const checked = (e.target as HTMLInputElement).checked;
+    
+    setFormState(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+    
+    // Clear error when field is changed
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  // Validate the form
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formState.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+    }
+    
+    if (!formState.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formState.email)) {
+        newErrors.email = 'Please enter a valid email address';
+      }
+    }
+    
+    if (formState.phone.trim() && !/^\d{10}$/.test(formState.phone.replace(/\D/g, ''))) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (validateForm()) {
+      setIsSubmitting(true);
+      
+      // Simulate API call
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        
+        // Reset form after successful submission
+        setFormState({
+          fullName: '',
+          email: '',
+          phone: '',
+          isExistingPatient: false
+        });
+      }, 1500);
+    }
+  };
+
   return (
     <div className="font-body">
       {/* Hero Section */}
@@ -196,29 +295,85 @@ export default function PatientPortal() {
             <p className="text-center mb-8">
               Sign up to be among the first to access our patient portal when it goes live. We'll email you with instructions on how to create your account.
             </p>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="notify-name">Full Name</label>
-                <input type="text" id="notify-name" className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="Your full name" />
+            
+            {isSuccess ? (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded mb-8" role="alert">
+                <h3 className="font-heading text-xl mb-2">Thank You for Signing Up!</h3>
+                <p>
+                  We've added you to our notification list. You'll be among the first to know when our patient portal launches.
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="notify-email">Email Address</label>
-                <input type="email" id="notify-email" className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="Your email address" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1" htmlFor="notify-phone">Phone Number (Optional)</label>
-                <input type="tel" id="notify-phone" className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="(123) 456-7890" />
-              </div>
-              <div className="flex items-start">
-                <input type="checkbox" id="notify-patient" className="mt-1 mr-2" />
-                <label htmlFor="notify-patient" className="text-sm">I am an existing patient of Dr. Gafanovich</label>
-              </div>
-              <div className="text-center">
-                <button type="submit" className="bg-primary hover:bg-primary/90 text-white font-body font-bold py-2.5 px-6 rounded-button transition duration-300 shadow hover:shadow-md">
-                  Notify Me When Portal Launches
-                </button>
-              </div>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <FormGroup>
+                  <TextField
+                    label="Full Name"
+                    name="fullName"
+                    id="notify-name"
+                    value={formState.fullName}
+                    onChange={handleChange}
+                    error={errors.fullName}
+                    placeholder="Your full name"
+                    required
+                    fullWidth
+                  />
+                </FormGroup>
+                
+                <FormGroup>
+                  <TextField
+                    label="Email Address"
+                    name="email"
+                    id="notify-email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                    error={errors.email}
+                    placeholder="Your email address"
+                    required
+                    fullWidth
+                  />
+                </FormGroup>
+                
+                <FormGroup>
+                  <TextField
+                    label="Phone Number (Optional)"
+                    name="phone"
+                    id="notify-phone"
+                    type="tel"
+                    value={formState.phone}
+                    onChange={handleChange}
+                    error={errors.phone}
+                    placeholder="(123) 456-7890"
+                    hint="We'll only use this for portal-related notifications"
+                    fullWidth
+                  />
+                </FormGroup>
+                
+                <div className="flex items-start pt-2">
+                  <input 
+                    type="checkbox" 
+                    id="notify-patient" 
+                    name="isExistingPatient"
+                    checked={formState.isExistingPatient}
+                    onChange={handleChange}
+                    className="mt-1 mr-2" 
+                  />
+                  <label htmlFor="notify-patient" className="text-sm">
+                    I am an existing patient of Dr. Gafanovich
+                  </label>
+                </div>
+                
+                <div className="text-center pt-4">
+                  <Button 
+                    type="submit" 
+                    isLoading={isSubmitting} 
+                    disabled={isSubmitting}
+                  >
+                    Notify Me When Portal Launches
+                  </Button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </section>

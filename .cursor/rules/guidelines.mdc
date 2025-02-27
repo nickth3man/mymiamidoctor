@@ -1,0 +1,52 @@
+---
+description: should be applied for every response
+globs: 
+alwaysApply: true
+---
+# Incremental Verification Rule
+
+## Core Principle
+Every code change must be independently verifiable and validated before moving to the next change.
+
+## Rule Requirements
+
+For every code change implemented:
+
+1. **Identify Clearly**: First clearly identify the specific issue or requirement being addressed
+2. **Change Incrementally**: Make changes in small, testable increments
+3. **Verify Immediately**: After each significant modification, verify the change works as expected
+4. **Document Thoroughly**: Document both the change and the verification method used
+5. **Confirm Before Proceeding**: Only proceed to the next improvement after confirming the current one is working correctly
+
+## Benefits
+
+This rule ensures that:
+- Quality is maintained throughout the implementation process
+- New issues are not introduced while fixing existing ones
+- A clear audit trail of changes and their verification exists
+- Sources of any problems can be easily identified
+- The project remains in a functional state throughout the implementation
+
+## Application
+This rule applies to all code changes in the MyMiamiDoctor website project, including:
+- Bug fixes
+- Feature additions
+- Refactoring
+- Performance optimizations
+- Structural improvements
+
+## Verification Methods
+Acceptable verification methods include:
+- Manual testing with documented steps
+- Automated tests (unit, integration, etc.)
+- Build success verification
+- UI validation against design requirements
+- Cross-browser/device testing for UI changes
+
+## Documentation Format
+Each change should be documented with:
+- Issue addressed
+- Changes made
+- Verification method
+- Verification result
+- Any relevant notes or observations 

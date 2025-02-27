@@ -1,271 +1,227 @@
-import Image from "next/image";
-import Link from "next/link";
-import { HeroSection, ContactForm } from "@/components";
+"use client";
 
-export default function Home() {
+import React from 'react';
+import { 
+  Heading, 
+  Text, 
+  Button,
+  Container,
+  Section,
+  HeroSection,
+  Grid,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter
+} from '@/components';
+import Link from 'next/link';
+
+export default function HomePage() {
+  // Sample data for services
+  const services = [
+    {
+      title: 'General Consultations',
+      description: 'Comprehensive medical consultations for a wide range of health concerns.',
+      icon: '👨‍⚕️',
+      link: '/services#general-consultations'
+    },
+    {
+      title: 'Telehealth Appointments',
+      description: 'Virtual appointments from the comfort of your home via secure video conferencing.',
+      icon: '💻',
+      link: '/telehealth'
+    },
+    {
+      title: 'Follow-up Visits',
+      description: 'Continued care and monitoring of your health progress and treatment effectiveness.',
+      icon: '📋',
+      link: '/services#follow-up-visits'
+    },
+    {
+      title: 'Prescription Renewals',
+      description: 'Easy and convenient prescription renewal service for existing patients.',
+      icon: '💊',
+      link: '/services#prescription-renewals'
+    }
+  ];
+
+  // Sample data for testimonials
+  const testimonials = [
+    {
+      quote: "Dr. Miami provided exceptional care during my telehealth appointment. The online process was seamless and I felt like I was in the office.",
+      author: "Maria G.",
+      location: "Coral Gables, FL"
+    },
+    {
+      quote: "I've been a patient for years and the level of personalized care is outstanding. The new telehealth option has made it even more convenient.",
+      author: "David R.",
+      location: "Miami Beach, FL"
+    },
+    {
+      quote: "As someone with a busy schedule, the flexible appointment options and patient portal have made managing my healthcare so much easier.",
+      author: "Sophia T.",
+      location: "Brickell, Miami"
+    }
+  ];
+
   return (
-    <>
-      <HeroSection 
+    <main>
+      {/* Hero Section */}
+      <HeroSection
         title="Quality Healthcare in Miami"
-        subtitle="Expert doctors providing personalized care for you and your family"
+        subtitle="Personalized medical care with convenient telehealth options"
         ctaText="Book an Appointment"
         ctaLink="/contact"
-        imageSrc="/images/hero-image.jpg"
+        secondaryCtaText="Learn About Telehealth"
+        secondaryCtaLink="/telehealth"
+        backgroundImage="/images/hero-background.jpg"
       />
-      
-      {/* Other sections */}
-      
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl text-navy mb-4">Why Choose Us</h2>
-            <p className="max-w-2xl mx-auto text-lg">Dr. Marina Gafanovich provides compassionate, personalized care for all patients.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Telehealth Feature Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl text-navy mb-4">Telehealth Services</h2>
-            <p className="max-w-2xl mx-auto text-lg">Connect with Dr. Gafanovich from anywhere in Miami. Get the care you need without leaving your home.</p>
-          </div>
-          
-          {/* Three-Step Process */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Step 1 */}
-            <div className="text-center bg-white p-6 rounded-lg shadow-md border border-accent hover:shadow-lg transition-shadow">
-              <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 text-primary" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  width="40"
-                  height="40"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="font-heading text-xl mb-2 text-navy">Book Your Appointment</h3>
-              <p>Choose a time that works for your schedule through our easy online booking system.</p>
-            </div>
-            
-            {/* Step 2 */}
-            <div className="text-center bg-white p-6 rounded-lg shadow-md border border-accent hover:shadow-lg transition-shadow">
-              <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 text-primary" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  width="40"
-                  height="40"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="font-heading text-xl mb-2 text-navy">Connect From Anywhere</h3>
-              <p>Join your video visit using your phone, tablet, or computer – no special equipment needed.</p>
-            </div>
-            
-            {/* Step 3 */}
-            <div className="text-center bg-white p-6 rounded-lg shadow-md border border-accent hover:shadow-lg transition-shadow">
-              <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-10 w-10 text-primary" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  width="40"
-                  height="40"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-              </div>
-              <h3 className="font-heading text-xl mb-2 text-navy">Get Personalized Care</h3>
-              <p>Discuss your health concerns, get a diagnosis, and receive a treatment plan—all without leaving home.</p>
-            </div>
-          </div>
-          
-          <div className="text-center mt-10">
-            <Link 
-              href="/telehealth" 
-              className="bg-primary hover:bg-primary/90 text-white font-body font-bold py-3 px-6 rounded-button transition duration-300 shadow hover:shadow-md inline-block"
-            >
-              Learn More About Telehealth
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Services Section */}
-      <section className="py-16 px-4 bg-accent/30">
-        <div className="container mx-auto">
+      <Section className="bg-gray-50">
+        <Container>
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl text-navy mb-4">Our Services</h2>
-            <p className="max-w-2xl mx-auto text-lg">Comprehensive primary care services for all your healthcare needs.</p>
+            <Heading level={2}>Our Services</Heading>
+            <Text className="mt-4 max-w-2xl mx-auto">
+              We offer a comprehensive range of medical services to meet your healthcare needs,
+              both in-person and through our secure telehealth platform.
+            </Text>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Service Card 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-accent hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  width="32"
-                  height="32"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
+
+          <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service) => (
+              <Card key={service.title} className="h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl" aria-hidden="true">{service.icon}</span>
+                    <Heading level={3}>{service.title}</Heading>
+                  </div>
+                </CardHeader>
+                <CardBody>
+                  <Text>{service.description}</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button href={service.link} variant="text">Learn More</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </Grid>
+        </Container>
+      </Section>
+
+      {/* Telehealth Benefits Section */}
+      <Section>
+        <Container>
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="lg:w-1/2">
+              <div className="bg-primary/10 rounded-lg p-8 aspect-video flex items-center justify-center">
+                <span className="text-6xl">🩺</span>
               </div>
-              <h3 className="font-heading text-xl mb-3 text-center text-navy">Chronic Disease Management</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>High blood pressure</span>
+            </div>
+            <div className="lg:w-1/2">
+              <Heading level={2}>Telehealth Benefits</Heading>
+              <Text className="mt-4 mb-6">
+                Experience the convenience of quality healthcare from the comfort of your home.
+                Our telehealth services provide secure, HIPAA-compliant video consultations with
+                the same level of care you expect from in-person visits.
+              </Text>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <Text>No travel or waiting room time</Text>
                 </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Diabetes</span>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <Text>Same quality care as in-person visits</Text>
                 </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Heart disease</span>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <Text>Secure, HIPAA-compliant platform</Text>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <Text>Prescription management available</Text>
                 </li>
               </ul>
-            </div>
-            
-            {/* Service Card 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-accent hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  width="32"
-                  height="32"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-              </div>
-              <h3 className="font-heading text-xl mb-3 text-center text-navy">Preventive Care</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Annual physicals</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Vaccinations</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Health screenings</span>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Service Card 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-accent hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-8 w-8 text-primary" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  width="32"
-                  height="32"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="font-heading text-xl mb-3 text-center text-navy">Urgent Care</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Cold & flu</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Infections</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  <span>Minor injuries</span>
-                </li>
-              </ul>
+              <Button href="/telehealth">Learn More About Telehealth</Button>
             </div>
           </div>
-          
-          <div className="text-center mt-10">
-            <Link 
-              href="/services" 
-              className="border border-primary text-primary hover:bg-primary/10 font-body font-bold py-3 px-6 rounded-button transition duration-300 inline-block"
-            >
-              View All Services
-            </Link>
-          </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Testimonials Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto">
+      <Section className="bg-gray-50">
+        <Container>
           <div className="text-center mb-12">
-            <h2 className="font-heading text-3xl text-navy mb-4">What Our Patients Say</h2>
-            <p className="max-w-2xl mx-auto text-lg">Hear from patients who have experienced Dr. Gafanovich's care.</p>
+            <Heading level={2}>What Our Patients Say</Heading>
+            <Text className="mt-4 max-w-2xl mx-auto">
+              Don't just take our word for it. Here's what our patients have to say about their experience.
+            </Text>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Testimonial 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-              <div className="flex text-secondary mb-2">★★★★★</div>
-              <p className="italic mb-4">"Dr. Gafanovich is an exceptional doctor who takes the time to listen to my concerns. Her telehealth visits are convenient and thorough."</p>
-              <p className="font-semibold">Sarah M.</p>
+
+          <Grid className="grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="h-full">
+                <CardBody>
+                  <div className="text-primary text-4xl mb-4">"</div>
+                  <Text className="italic mb-6">{testimonial.quote}</Text>
+                  <div className="mt-auto">
+                    <Text className="font-bold">{testimonial.author}</Text>
+                    <Text className="text-sm text-gray-600">{testimonial.location}</Text>
+                  </div>
+                </CardBody>
+              </Card>
+            ))}
+          </Grid>
+        </Container>
+      </Section>
+
+      {/* About Preview Section */}
+      <Section>
+        <Container>
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+            <div className="lg:w-1/2">
+              <div className="bg-secondary/10 rounded-lg p-8 aspect-square flex items-center justify-center">
+                <span className="text-6xl">👨‍⚕️</span>
+              </div>
             </div>
-            
-            {/* Testimonial 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-              <div className="flex text-secondary mb-2">★★★★★</div>
-              <p className="italic mb-4">"As a busy professional, I appreciate being able to see Dr. Gafanovich via telehealth. She provides the same quality care as in-person visits."</p>
-              <p className="font-semibold">Michael R.</p>
-            </div>
-            
-            {/* Testimonial 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-              <div className="flex text-secondary mb-2">★★★★★</div>
-              <p className="italic mb-4">"Dr. Gafanovich speaks Russian, which makes it so much easier for my parents to communicate their health concerns. We're grateful to have found her."</p>
-              <p className="font-semibold">Elena K.</p>
+            <div className="lg:w-1/2">
+              <Heading level={2}>About Dr. Miami</Heading>
+              <Text className="mt-4 mb-6">
+                Dr. Miami is a board-certified physician with over 15 years of experience
+                providing exceptional healthcare to the Miami community. With a focus on
+                patient-centered care, Dr. Miami combines medical expertise with a compassionate
+                approach to help patients achieve their best health.
+              </Text>
+              <Text className="mb-8">
+                After graduating from the University of Miami School of Medicine, Dr. Miami
+                completed residency training at Jackson Memorial Hospital and has been serving
+                the South Florida community ever since.
+              </Text>
+              <Button href="/about">Learn More About Dr. Miami</Button>
             </div>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-navy text-white">
-        <div className="container mx-auto text-center">
-          <h2 className="font-heading text-3xl mb-6">Ready to Experience Better Healthcare?</h2>
-          <p className="max-w-2xl mx-auto text-lg mb-8">Schedule your telehealth appointment today and connect with Dr. Gafanovich from the comfort of your home.</p>
-          <Link 
-            href="/telehealth" 
-            className="bg-secondary hover:bg-secondary/90 text-white font-body font-bold py-3 px-8 rounded-button transition duration-300 shadow hover:shadow-md inline-block"
-          >
-            Book Your Telehealth Visit Now
-          </Link>
-        </div>
-      </section>
-    </>
+      <Section className="bg-primary text-white">
+        <Container>
+          <div className="text-center py-8">
+            <Heading level={2} className="text-white">Ready to Schedule Your Appointment?</Heading>
+            <Text className="mt-4 mb-8 max-w-2xl mx-auto">
+              Whether you prefer an in-person visit or the convenience of telehealth,
+              we're here to provide the care you need.
+            </Text>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button href="/contact" variant="secondary">Book an Appointment</Button>
+              <Button href="/telehealth" variant="outline" className="text-white border-white hover:bg-white/10">
+                Learn About Telehealth
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </main>
   );
 }
