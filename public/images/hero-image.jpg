@@ -1,0 +1,6 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" fill="#e6f7ff"/>
+  <rect x="450" y="340" width="300" height="120" fill="#cce6ff"/>
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" dominant-baseline="middle" fill="#3399ff">Hero Image Placeholder</text>
+  <text x="600" y="430" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" dominant-baseline="middle" fill="#666">Miami Doctor Healthcare</text>
+</svg> 
