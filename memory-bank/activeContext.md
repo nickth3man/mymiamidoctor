@@ -37,3 +37,4 @@ Based on the existing MyMiamiDoctor website (a Next.js application that is appro
 2. The user has decided to stop rewriting the commit messages
 3. Test the CMS functionality
 4. Create documentation for content editors
+5. Verify Copilot commit message generation
