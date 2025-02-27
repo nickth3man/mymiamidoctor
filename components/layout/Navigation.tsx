@@ -248,7 +248,7 @@ export function Navigation() {
             </div>
           ))}
           <div className="pt-4 pb-2">
-            <Button href="/contact" fullWidth onClick={() => setMobileMenuOpen(false)}>
+            <Button href="/contact" isFullWidth onClick={() => setMobileMenuOpen(false)}>
               Book Appointment
             </Button>
           </div>
