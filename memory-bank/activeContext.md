@@ -33,7 +33,7 @@ Based on the existing MyMiamiDoctor website (a Next.js application that is appro
   - app/patient-portal/page.tsx: Removed pageMetadata export while keeping "use client" directive
 
 ## Next Steps
-1. Test the CMS functionality
-2. Create documentation for content editors
-3. Set up user accounts in Netlify Identity
-4. Provide training for content editors
+1. Rewrite the README file
+2. The user has decided to stop rewriting the commit messages
+3. Test the CMS functionality
+4. Create documentation for content editors
