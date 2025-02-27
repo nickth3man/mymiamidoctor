@@ -22,15 +22,17 @@ export const Image: React.FC<ImageProps> = ({
   className = '',
   aspectRatio = 'auto',
 }) => {
-  const [error, setError] = useState(false);
+  const [imgError, setImgError] = useState(false);
   
   const getPlaceholderSrc = (): string => {
     if (aspectRatio === '1:1') {
       return '/images/placeholders/square.svg';
     } else if (aspectRatio === '16:9') {
       return '/images/placeholders/widescreen.svg';
-    } else {
+    } else if (aspectRatio === '4:3') {
       return '/images/placeholders/standard.svg';
+    } else {
+      return '/images/placeholders/placeholder.svg';
     }
   };
 
@@ -50,33 +52,49 @@ export const Image: React.FC<ImageProps> = ({
   const dimensions = getDimensions();
 
   // If there's an error loading the image, show a placeholder
-  const imageSrc = error ? getPlaceholderSrc() : src;
+  const imageSrc = imgError ? getPlaceholderSrc() : src;
+  
+  // Check if the image is an SVG or placeholder
+  const isSvg = src.toLowerCase().endsWith('.svg');
+  const isPlaceholder = imgError || src.includes('placeholders');
 
   return (
     <div 
       className={`relative overflow-hidden ${className}`}
       style={{ 
-        width: dimensions.width, 
-        height: dimensions.height,
+        width: '100%', 
+        height: '100%',
+        maxWidth: dimensions.width,
+        maxHeight: dimensions.height,
       }}
     >
-      {error ? (
-        // Show SVG directly when there's an error
+      {isSvg || isPlaceholder ? (
+        // Show img tag for SVGs or placeholders
         <img 
           src={imageSrc} 
           alt={alt} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-lg"
+          onError={() => !imgError && setImgError(true)}
         />
       ) : (
-        // Use Next.js Image when no error
+        // Use Next.js Image for other image types
         <NextImage
           src={imageSrc}
           alt={alt}
           width={dimensions.width}
           height={dimensions.height}
-          className="object-cover"
-          onError={() => setError(true)}
+          className="object-cover rounded-lg"
+          onError={() => setImgError(true)}
+          priority={true}
         />
+      )}
+      
+      {imgError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-70 rounded-lg">
+          <p className="text-gray-600 text-center px-4 font-semibold">
+            {alt || "Image placeholder"}
+          </p>
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,3 @@
-"use client";
-
 import type { Metadata } from "next";
 import { montserrat, sourceSansPro } from "./fonts";
 import "./globals.css";
@@ -18,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${sourceSansPro.variable}`}>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-background text-foreground">
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />
