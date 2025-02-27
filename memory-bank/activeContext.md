@@ -32,10 +32,11 @@ Following a systematic deployment process for the MyMiamiDoctor Next.js applicat
   - Security headers
   - Asset optimization
 - Confirmed Next.js configuration is compatible with Netlify deployment
-- Verified package.json has the correct dependencies including @decapcms/app
+- Verified package.json has the correct dependencies including netlify-cms-app
 - Modified package.json build script to use `--legacy-peer-deps` flag to resolve dependency conflicts between React 18 and Netlify CMS
 - Started the deployment process by connecting GitHub repository to Netlify
 - Encountered and resolved build error related to React version compatibility with Netlify CMS
+- Fixed package name issue by replacing @decapcms/app with netlify-cms-app in package.json
 
 ## Current Deployment Status
 - GitHub repository successfully connected to Netlify

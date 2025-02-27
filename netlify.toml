@@ -14,6 +14,8 @@
 [build.environment]
   # Next.js specific settings
   NEXT_TELEMETRY_DISABLED = "1"
+  # Install devDependencies during build
+  NPM_FLAGS = "--production=false --legacy-peer-deps"
 
 # Production context: all deploys from the Production branch set in your site's
 # deploy contexts will inherit these settings.

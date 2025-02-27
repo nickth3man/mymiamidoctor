@@ -1,3 +1,36 @@
+12:06:03 PM: build-image version: 9a361c83c6a43010ba0aa3ea38214accc0223b2c (noble)
+12:06:03 PM: buildbot version: 9a4374dc9e2c1cbd2a152e441d69a3a6d7e12511
+12:06:03 PM: Fetching cached dependencies
+12:06:03 PM: Failed to fetch cache, continuing with build
+12:06:03 PM: Starting to prepare the repo for build
+12:06:03 PM: No cached dependencies found. Cloning fresh repo
+12:06:03 PM: git clone --filter=blob:none https://github.com/nickth3man/mymiamidoctor
+12:06:03 PM: Preparing Git Reference refs/heads/master
+12:06:05 PM: Custom build path detected. Proceeding with the specified path: ''
+12:06:05 PM: Starting to install dependencies
+12:06:05 PM: Python version set to 3.13.2
+12:06:05 PM: Ruby version set to 2.7.2
+12:06:06 PM: mise go@1.19         install
+12:06:06 PM: mise go@1.19         download go1.19.linux-amd64.tar.gz
+12:06:08 PM: mise go@1.19         checksum go1.19.linux-amd64.tar.gz
+12:06:08 PM: mise go@1.19         extract go1.19.linux-amd64.tar.gz
+12:06:10 PM: mise go@1.19         go version
+12:06:10 PM: mise go@1.19         go version go1.19 linux/amd64
+12:06:10 PM: mise go@1.19       ✓ installed
+12:06:10 PM: Go version set to 1.19
+12:06:10 PM: Using PHP version 8.3
+12:06:12 PM: v22.14.0 is already installed.
+12:06:12 PM: Now using node v22.14.0 (npm v10.9.2)
+12:06:12 PM: Enabling Node.js Corepack
+12:06:12 PM: Started restoring cached build plugins
+12:06:12 PM: Finished restoring cached build plugins
+12:06:12 PM: WARNING: The environment variable 'NODE_ENV' is set to 'production'. Any 'devDependencies' in package.json will not be installed
+12:06:12 PM: Started restoring cached corepack dependencies
+12:06:12 PM: Finished restoring cached corepack dependencies
+12:06:12 PM: No npm workspaces detected
+12:06:12 PM: Started restoring cached node modules
+12:06:12 PM: Finished restoring cached node modules
+12:06:12 PM: Installing npm packages using npm version 10.9.2
 # Memory Bank: Progress Tracking
 
 ## Completed Tasks
@@ -92,6 +125,14 @@
 - Modified package.json build script to include `npm install --legacy-peer-deps` before running Next.js build
 - Updated decisionLog.md with detailed rationale for the solution
 - Updated activeContext.md to reflect the current deployment status
+
+### 2/27/2025 - Package Name Fix
+- Encountered 404 error during npm package installation for @decapcms/app
+- Investigated the npm registry and found that the package name was incorrect
+- Discovered that the admin/index.html file was using netlify-cms instead of @decapcms/app
+- Fixed the issue by replacing @decapcms/app with netlify-cms-app in package.json
+- Committed and pushed the changes to the GitHub repository
+- Updated Memory Bank files to reflect the package name fix
 
 ## In Progress Tasks
 - Netlify CMS Integration
