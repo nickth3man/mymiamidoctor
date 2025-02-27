@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NextImage from 'next/image';
+import { useLazyImage, shouldPrioritize } from '../../lib/imageOptimization';
 
 type AspectRatio = '1:1' | '4:3' | '16:9' | 'auto';
+type ImagePosition = 'above-fold' | 'below-fold' | 'hero';
 
 interface ImageProps {
   src: string;
@@ -12,6 +14,10 @@ interface ImageProps {
   height?: number;
   className?: string;
   aspectRatio?: AspectRatio;
+  position?: ImagePosition;
+  sizes?: string;
+  quality?: number;
+  loading?: 'eager' | 'lazy';
 }
 
 export const Image: React.FC<ImageProps> = ({
@@ -21,6 +27,10 @@ export const Image: React.FC<ImageProps> = ({
   height = 600,
   className = '',
   aspectRatio = 'auto',
+  position = 'below-fold',
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  quality = 85,
+  loading,
 }) => {
   const [imgError, setImgError] = useState(false);
   
@@ -50,19 +60,29 @@ export const Image: React.FC<ImageProps> = ({
   };
 
   const dimensions = getDimensions();
-
-  // If there's an error loading the image, show a placeholder
-  const imageSrc = imgError ? getPlaceholderSrc() : src;
+  const placeholder = getPlaceholderSrc();
+  
+  // Use lazy loading for images below the fold
+  const { imageSrc, isLoaded } = useLazyImage(
+    imgError ? placeholder : src,
+    placeholder
+  );
+  
+  // Determine if the image should be loaded with priority
+  const isPriority = shouldPrioritize(position);
+  
+  // Determine loading strategy based on position and explicit loading prop
+  const loadingStrategy = loading || (isPriority ? 'eager' : 'lazy');
   
   // Check if the image is an SVG or placeholder
   const isSvg = src.toLowerCase().endsWith('.svg');
   const isPlaceholder = imgError || src.includes('placeholders');
 
   return (
-    <div 
+    <div
       className={`relative overflow-hidden ${className}`}
-      style={{ 
-        width: '100%', 
+      style={{
+        width: '100%',
         height: '100%',
         maxWidth: dimensions.width,
         maxHeight: dimensions.height,
@@ -70,11 +90,12 @@ export const Image: React.FC<ImageProps> = ({
     >
       {isSvg || isPlaceholder ? (
         // Show img tag for SVGs or placeholders
-        <img 
-          src={imageSrc} 
-          alt={alt} 
+        <img
+          src={imageSrc}
+          alt={alt}
           className="w-full h-full object-cover rounded-lg"
           onError={() => !imgError && setImgError(true)}
+          loading={loadingStrategy}
         />
       ) : (
         // Use Next.js Image for other image types
@@ -83,10 +104,17 @@ export const Image: React.FC<ImageProps> = ({
           alt={alt}
           width={dimensions.width}
           height={dimensions.height}
-          className="object-cover rounded-lg"
+          className={`object-cover rounded-lg ${!isLoaded ? 'opacity-0' : 'opacity-100 transition-opacity duration-300'}`}
           onError={() => setImgError(true)}
-          priority={true}
+          priority={isPriority}
+          quality={quality}
+          sizes={sizes}
+          loading={loadingStrategy}
         />
+      )}
+      
+      {!isLoaded && !isPlaceholder && (
+        <div className="absolute inset-0 bg-gray-100 animate-pulse rounded-lg" />
       )}
       
       {imgError && (
@@ -98,4 +126,4 @@ export const Image: React.FC<ImageProps> = ({
       )}
     </div>
   );
-}; 
+};

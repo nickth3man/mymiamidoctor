@@ -13,12 +13,12 @@ import {
   CardBody,
   TextField,
   Select
-} from '@/components';
-import { TextArea } from '@/components/ui/TextArea';
-import { Radio } from '@/components/ui/Radio';
-import { Checkbox } from '@/components/ui/Checkbox';
+} from '../../components';
+import { TextArea } from '../../components/ui/TextArea';
+import { Radio } from '../../components/ui/Radio';
+import { Checkbox } from '../../components/ui/Checkbox';
 import type { Metadata } from "next";
-import type { TextFieldType } from '@/components/ui/TextField';
+import type { TextFieldType } from '../../components/ui/TextField';
 
 export const metadata: Metadata = {
   title: "Contact & Appointments | MyMiamiDoctor",

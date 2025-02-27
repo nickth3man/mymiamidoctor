@@ -1,7 +1,10 @@
+"use client";
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components';
+import { Button } from '../ui/Button';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface NavigationItem {
   label: string;
@@ -127,7 +130,10 @@ export function Navigation() {
                 )}
               </div>
             ))}
-            <Button href="/contact" size="sm">Book Appointment</Button>
+            <div className="flex items-center space-x-4">
+              <LanguageSwitcher />
+              <Button href="/contact" size="sm">Book Appointment</Button>
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -247,7 +253,10 @@ export function Navigation() {
               )}
             </div>
           ))}
-          <div className="pt-4 pb-2">
+          <div className="pt-4 pb-2 space-y-4">
+            <div className="px-3">
+              <LanguageSwitcher />
+            </div>
             <Button href="/contact" isFullWidth onClick={() => setMobileMenuOpen(false)}>
               Book Appointment
             </Button>

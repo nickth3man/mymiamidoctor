@@ -1,4 +1,6 @@
 import React, { forwardRef } from 'react';
+import { cn } from '../../lib/utils';
+import { typography, colors } from '../../lib/design-tokens';
 
 export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type TextWeight = 'normal' | 'medium' | 'semibold' | 'bold';
@@ -30,7 +32,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(
     // Determine the HTML element to use
     const Component = as;
 
-    // Define size styles
+    // Define size styles with better readability
     const sizeStyles: Record<TextSize, string> = {
       'xs': 'text-xs',
       'sm': 'text-sm',
@@ -47,7 +49,7 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       'bold': 'font-bold',
     };
 
-    // Define variant styles
+    // Define variant styles with improved readability
     const variantStyles: Record<TextVariant, string> = {
       'body': 'leading-relaxed',
       'caption': 'text-sm text-gray-600 leading-normal',
@@ -61,16 +63,18 @@ export const Text = forwardRef<HTMLElement, TextProps>(
       'right': 'text-right',
     };
 
-    // Combined classes
-    const textClasses = [
+    // Combined classes with text rendering optimization
+    const textClasses = cn(
       'font-sans',
       'text-foreground',
+      'antialiased',
+      'text-rendering-optimizeLegibility',
       sizeStyles[size],
       weightStyles[weight],
       variantStyles[variant],
       alignStyles[align],
       className
-    ].join(' ');
+    );
 
     return (
       <Component
@@ -84,4 +88,4 @@ export const Text = forwardRef<HTMLElement, TextProps>(
   }
 );
 
-Text.displayName = 'Text'; 
+Text.displayName = 'Text';

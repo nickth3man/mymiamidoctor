@@ -1,7 +1,10 @@
 import React, { forwardRef } from 'react';
 import { Text } from './Text';
+import { cn } from '../../lib/utils';
+import { colors } from '../../lib/design-tokens';
+import { focusClasses } from '../../lib/design-tokens/focus';
 
-export type TextFieldType = 'text' | 'email' | 'password' | 'tel' | 'url' | 'number' | 'search';
+export type TextFieldType = 'text' | 'email' | 'password' | 'tel' | 'url' | 'number' | 'search' | 'date' | 'time';
 
 export interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label: string;
@@ -15,6 +18,7 @@ export interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInput
   inputClassName?: string;
   errorClassName?: string;
   hintClassName?: string;
+  autocomplete?: string;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
@@ -33,6 +37,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       hintClassName = '',
       disabled = false,
       required = false,
+      autocomplete,
       ...rest
     } = props;
 
@@ -42,78 +47,72 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const hintId = `${inputId}-hint`;
 
     // Base container styles
-    const containerClasses = [
+    const containerClasses = cn(
       'flex flex-col',
       fullWidth ? 'w-full' : '',
       className
-    ].filter(Boolean).join(' ');
+    );
 
     // Label styles
-    const labelClasses = [
+    const labelClasses = cn(
       'mb-1 font-medium text-sm',
       disabled ? 'text-gray-400' : 'text-gray-700',
       labelClassName
-    ].filter(Boolean).join(' ');
+    );
 
-    // Input styles
-    const inputClasses = [
+    // Improved input styles with better visual indicators for validation states
+    const inputClasses = cn(
       'px-4 py-2 rounded-md border',
-      'focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary',
+      'focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500',
       'transition-colors duration-200',
-      error ? 'border-red-500' : 'border-gray-300',
+      'min-h-[44px]', // Ensure minimum touch target height
+      error ? 'border-red-500 bg-red-50' : 'border-gray-300',
       disabled ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white',
       fullWidth ? 'w-full' : '',
       inputClassName
-    ].filter(Boolean).join(' ');
+    );
 
-    // Error styles
-    const errorClasses = [
-      'mt-1 text-red-500 text-sm',
+    // Error styles with improved contrast
+    const errorClasses = cn(
+      'mt-1 text-red-600 text-sm font-medium',
       errorClassName
-    ].filter(Boolean).join(' ');
+    );
 
     // Hint styles
-    const hintClasses = [
-      'mt-1 text-gray-500 text-sm',
+    const hintClasses = cn(
+      'mt-1 text-gray-600 text-sm',
       hintClassName
-    ].filter(Boolean).join(' ');
+    );
 
-    // Determine which description to associate with the input
+    // Improved aria attributes for validation
     const ariaDescribedBy = [
       error ? errorId : null,
       hint ? hintId : null
     ].filter(Boolean).join(' ') || undefined;
 
-    // Create input element with appropriate props
-    const inputElement = (
-      <input
-        ref={ref}
-        id={inputId}
-        type={type}
-        className={inputClasses}
-        disabled={disabled}
-        required={required}
-        aria-describedby={ariaDescribedBy}
-        {...rest}
-      />
-    );
-
-    // Add aria-invalid attribute conditionally
-    const inputWithAriaInvalid = error 
-      ? React.cloneElement(inputElement, { 'aria-invalid': 'true' })
-      : React.cloneElement(inputElement, { 'aria-invalid': 'false' });
-
     return (
       <div className={containerClasses}>
-        <label 
-          htmlFor={inputId} 
+        <label
+          htmlFor={inputId}
           className={labelClasses}
         >
           {label}
           {required && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
         </label>
         
-        {inputWithAriaInvalid}
+        <input
+          ref={ref}
+          id={inputId}
+          type={type}
+          className={inputClasses}
+          disabled={disabled}
+          required={required}
+          aria-describedby={ariaDescribedBy}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-required={required ? 'true' : 'false'}
+          autoComplete={autocomplete}
+          {...rest}
+        />
         
         {error && (
           <div id={errorId} className={errorClasses} role="alert">
@@ -131,4 +130,4 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   }
 );
 
-TextField.displayName = 'TextField'; 
+TextField.displayName = 'TextField';

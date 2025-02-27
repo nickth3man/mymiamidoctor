@@ -1,0 +1,165 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contact",
+    "appointment": "Book Appointment",
+    "patientPortal": "Patient Portal"
+  },
+  "home": {
+    "hero": {
+      "title": "Your Health, Our Priority",
+      "subtitle": "Comprehensive healthcare services in Miami",
+      "cta": "Book an Appointment"
+    },
+    "services": {
+      "title": "Our Services",
+      "subtitle": "Comprehensive healthcare for you and your family",
+      "generalConsultations": "General Consultations",
+      "followUpVisits": "Follow-up Visits",
+      "telehealth": "Telehealth",
+      "prescriptionRenewals": "Prescription Renewals"
+    },
+    "about": {
+      "title": "About MyMiamiDoctor",
+      "content": "MyMiamiDoctor provides comprehensive healthcare services to the Miami community. Our team of experienced healthcare professionals is dedicated to providing personalized care to meet your health needs."
+    },
+    "testimonials": {
+      "title": "What Our Patients Say",
+      "subtitle": "Read testimonials from our satisfied patients"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "subtitle": "We're here to help with any questions",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn more about MyMiamiDoctor",
+    "mission": {
+      "title": "Our Mission",
+      "content": "To provide accessible, high-quality healthcare services to the Miami community."
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Meet our experienced healthcare professionals"
+    },
+    "values": {
+      "title": "Our Values",
+      "compassion": "Compassion",
+      "excellence": "Excellence",
+      "integrity": "Integrity",
+      "respect": "Respect",
+      "teamwork": "Teamwork"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive healthcare services for you and your family",
+    "generalConsultations": {
+      "title": "General Consultations",
+      "description": "Comprehensive medical consultations for a wide range of health concerns."
+    },
+    "followUpVisits": {
+      "title": "Follow-up Visits",
+      "description": "Regular check-ups to monitor your health progress and adjust treatment plans."
+    },
+    "telehealth": {
+      "title": "Telehealth",
+      "description": "Virtual consultations from the comfort of your home."
+    },
+    "prescriptionRenewals": {
+      "title": "Prescription Renewals",
+      "description": "Easy and convenient prescription renewal services."
+    }
+  },
+  "appointment": {
+    "title": "Book an Appointment",
+    "subtitle": "Schedule a visit with our healthcare professionals",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "date": "Preferred Date",
+      "time": "Preferred Time",
+      "service": "Service Type",
+      "message": "Additional Information",
+      "submit": "Book Appointment",
+      "patientType": "Patient Type",
+      "newPatient": "New Patient",
+      "existingPatient": "Existing Patient",
+      "insurance": "Insurance Provider",
+      "success": "Appointment Request Received",
+      "error": "Error submitting form"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help with any questions",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Message Sent Successfully",
+      "error": "Error sending message"
+    },
+    "info": {
+      "address": "123 Health Avenue, Miami, FL 33101",
+      "phone": "(305) 555-1234",
+      "email": "info@mymiamidoctor.com",
+      "hours": "Monday - Friday: 8:00 AM - 5:00 PM"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Health tips, news, and insights",
+    "readMore": "Read More",
+    "categories": "Categories",
+    "recentPosts": "Recent Posts",
+    "search": "Search",
+    "noResults": "No results found"
+  },
+  "footer": {
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "services": "Services",
+      "blog": "Blog",
+      "contact": "Contact",
+      "appointment": "Book Appointment",
+      "patientPortal": "Patient Portal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "accessibility": "Accessibility"
+    },
+    "copyright": "© 2025 MyMiamiDoctor. All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "notFound": "Page not found",
+    "backToHome": "Back to Home",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "language": "Language",
+    "english": "English",
+    "russian": "Russian"
+  }
+}
